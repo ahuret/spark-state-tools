@@ -97,13 +97,13 @@ object StateStoreWriter {
 
     // fill empty state until target version - 1
     (0 until version - 1).map { id =>
-      val store = StateStore.get(storeProviderId, keySchema, valueSchema, None, id,
+      val store = StateStore.get(storeProviderId, keySchema, valueSchema, 0, id,
         storeConf, hadoopConf)
       store.commit()
     }
 
     // all states will be written at version
-    val store = StateStore.get(storeProviderId, keySchema, valueSchema, None, version - 1,
+    val store = StateStore.get(storeProviderId, keySchema, valueSchema, 0, version - 1,
       storeConf, hadoopConf)
     iter.foreach { row =>
       store.put(

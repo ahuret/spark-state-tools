@@ -63,8 +63,13 @@ class StateStoreReaderRDD(
           p.partition, storeName)
         val stateStoreProviderId = StateStoreProviderId(stateStoreId, p.queryId)
 
-        val store = StateStore.get(stateStoreProviderId, keySchema, valueSchema,
-          indexOrdinal = None, version = batchId, storeConf = storeConf,
+        val store = StateStore.get(
+            stateStoreProviderId,
+            keySchema,
+            valueSchema,
+            numColsPrefixKey = 0,
+            version = batchId,
+            storeConf,
           hadoopConf = hadoopConfBroadcastWrapper.broadcastedConf.value.value)
 
         val encoder = RowEncoder(SchemaUtil.keyValuePairSchema(keySchema, valueSchema))

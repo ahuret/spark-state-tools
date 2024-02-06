@@ -1,4 +1,4 @@
-lazy val scala212 = "2.12.10"
+lazy val scala212 = "2.13.8"
 lazy val supportedScalaVersions = List(scala212)
 
 scalaVersion := scala212
@@ -32,14 +32,14 @@ javacOptions ++= Seq(
   "-g:vars"
 )
 
-val sparkVersion = "3.0.0"
+val sparkVersion = "3.4.1"
 
 libraryDependencies ++= Seq(
   "org.apache.spark" %% "spark-sql" % sparkVersion % "provided",
   "org.apache.spark" %% "spark-core" % sparkVersion % Test classifier "tests",
   "org.apache.spark" %% "spark-catalyst" % sparkVersion % Test classifier "tests",
   "org.apache.spark" %% "spark-sql" % sparkVersion % Test classifier "tests",
-  "org.scalatest" %% "scalatest" % "3.0.3" % Test withSources(),
+  "org.scalatest" %% "scalatest" % "3.2.17" % Test withSources(),
   "junit" % "junit" % "4.12" % Test
 )
 
@@ -76,13 +76,7 @@ scalacOptions ++= Seq(
   "-language:implicitConversions", // Allow definition of implicit functions called views
   "-unchecked", // Enable additional warnings where generated code depends on assumptions.
   "-Xcheckinit", // Wrap field accessors to throw an exception on uninitialized access.
-  "-Yno-adapted-args", // Do not adapt an argument list (either by inserting () or
                        // creating a tuple) to match the receiver.
-  "-Ypartial-unification", // Enable partial unification in type constructor inference
-  "-Ywarn-inaccessible", // Warn about inaccessible types in method signatures.
-  "-Ywarn-infer-any", // Warn when a type argument is inferred to be `Any`.
-  "-Ywarn-nullary-override", // Warn when non-nullary `def f()' overrides nullary `def f'.
-  "-Ywarn-nullary-unit", // Warn when nullary methods return Unit.
 )
 
 scalacOptions ++=
